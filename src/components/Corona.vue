@@ -12,32 +12,43 @@
       >
         <template slot="empty">No results found</template>
       </b-autocomplete>
+      <b-button type="is-primary">Search</b-button>
     </b-field>
     <div class="section">
-      <b-field>
-        <div class="box notification is-primary has-text-centered">
-          <p class="title is-3 is-spaced">Active</p>
-          <p>{{statewises.statewise[0].active}}</p>
+      <div class="columns">
+        <div class="column">
+          <b-field>
+            <div class="box notification is-primary has-text-centered">
+              <p class="title is-3 is-spaced">Active</p>
+              <p>{{statewises.active}}</p>
+            </div>
+          </b-field>
         </div>
-      </b-field>
-      <b-field>
-        <div class="box notification is-primary has-text-centered">
-          <p class="title">Confirmed</p>
-          <p>{{statewises.statewise[0].confirmed}}</p>
+        <div class="column">
+          <b-field>
+            <div class="box notification is-warning has-text-centered">
+              <p class="title">Confirmed</p>
+              <p>{{statewises.confirmed}}</p>
+            </div>
+          </b-field>
         </div>
-      </b-field>
-      <b-field>
-        <div class="box notification is-primary has-text-centered">
-          <p class="title">Death</p>
-          <p>{{statewises.statewise[0].death}}</p>
+        <div class="column">
+          <b-field>
+            <div class="box notification is-danger has-text-centered">
+              <p class="title">Death</p>
+              <p>{{statewises.deaths}}</p>
+            </div>
+          </b-field>
         </div>
-      </b-field>
-      <b-field>
-        <div class="box notification is-primary has-text-centered">
-          <p class="title">Recovered</p>
-          <p>{{statewises.statewise[0].recovered}}</p>
+        <div class="column">
+          <b-field>
+            <div class="box notification is-success has-text-centered">
+              <p class="title">Recovered</p>
+              <p>{{statewises.recovered}}</p>
+            </div>
+          </b-field>
         </div>
-      </b-field>
+      </div>
     </div>
     <!-- <p>{{statewises}}</p> -->
   </div>
@@ -64,7 +75,7 @@ export default {
         // JSON responses are automatically parsed.
         // console.log(response.data.statewise[0].active);
         console.log(response.data);
-        this.statewises = response.data;
+        this.statewises = response.data.statewise[0];
         // this.posts = response.data;
       })
       .catch(e => {
