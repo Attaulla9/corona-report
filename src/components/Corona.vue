@@ -1,31 +1,31 @@
 <template>
   <div class="section">
-    <b-field class="is-spaced">
-      <b-autocomplete
-        rounded
-        v-model="name"
-        :data="filteredDataArray"
-        placeholder="Search state"
-        icon="magnify"
-        clearable
-        @select="option => selected = option"
-      >
-        <template slot="empty">No results found</template>
-      </b-autocomplete>
-      <button class="button is-primary">Search</button>
-    </b-field>
-    <b-field class="is-spaced has-text-danger ">
-      <p class="text-danger has-text-centered">Last updated:<span class="has-text-success"> {{statewises.lastupdatedtime}}</span></p>
-    </b-field>
-
-    <!-- <div class v-for="(data,index) in statewises" :key="index">
-      <div v-for="(i,j) in data.statewise" :key="j">
-        <ul>
-          <li v-for="(k,index) in i" :key="index">{{k.active}}</li>
-        </ul>
+    <div class="columns">
+      <div class="column">
+        <b-field class="is-spaced">
+          <b-autocomplete
+            rounded
+            v-model="name"
+            :data="filteredDataArray"
+            placeholder="Search state"
+            icon="magnify"
+            clearable
+            @select="option => selected = option"
+          >
+            <template slot="empty">No results found</template>
+          </b-autocomplete>
+          <button class="button is-primary">Search</button>
+        </b-field>
       </div>
-    </div>-->
-
+      <div class="column">
+        <b-field class="is-spaced has-text-danger">
+          <p class="text-danger has-text-centered">
+            Last updated:
+            <span class="has-text-success">{{statewises.lastupdatedtime}}</span>
+          </p>
+        </b-field>
+      </div>
+    </div>
     <div class="section">
       <div class="columns">
         <div class="column">
@@ -150,5 +150,4 @@ export default {
 .box {
   max-width: 100%;
 }
-
 </style>
