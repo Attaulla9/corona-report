@@ -1,6 +1,6 @@
 <template>
   <div class="section">
-    <b-field>
+    <b-field class="is-spaced">
       <b-autocomplete
         rounded
         v-model="name"
@@ -12,8 +12,20 @@
       >
         <template slot="empty">No results found</template>
       </b-autocomplete>
-      <b-button type="is-primary">Search</b-button>
+      <button class="button is-primary">Search</button>
     </b-field>
+    <b-field class="is-spaced has-text-danger ">
+      <p class="text-danger has-text-centered">Last updated:<span class="has-text-success"> {{statewises.lastupdatedtime}}</span></p>
+    </b-field>
+
+    <!-- <div class v-for="(data,index) in statewises" :key="index">
+      <div v-for="(i,j) in data.statewise" :key="j">
+        <ul>
+          <li v-for="(k,index) in i" :key="index">{{k.active}}</li>
+        </ul>
+      </div>
+    </div>-->
+
     <div class="section">
       <div class="columns">
         <div class="column">
@@ -35,7 +47,7 @@
         <div class="column">
           <b-field>
             <div class="box notification is-danger has-text-centered">
-              <p class="title is-spaced">Death</p>
+              <p class="title is-spaced">Deceased</p>
               <p class="subtitle is-2">{{statewises.deaths}}</p>
             </div>
           </b-field>
@@ -62,30 +74,66 @@ import axios from "axios";
 export default {
   data() {
     return {
-      data: ["Karnatka", "Maharastra", "Kerala"],
+      stateName: [
+        "Andaman and Nicobar Islands",
+        "Andhra Pradesh",
+        "Arunachal Pradesh",
+        "Assam",
+        "Bihar",
+        "Chandigarh",
+        "Chhattisgarh",
+        "Dadra and Nagar Haveli",
+        "Daman and Diu",
+        "Delhi",
+        "Goa",
+        "Gujarat",
+        "Haryana",
+        "Himachal Pradesh",
+        "Jammu",
+        "Jharkhand",
+        "Karnataka",
+        "Kashmir",
+        "Kerala",
+        "Ladakh",
+        "Lakshadweep",
+        "Madhya Pradesh",
+        "Maharashtra",
+        "Manipur",
+        "Meghalaya",
+        "Mizoram",
+        "Nagaland",
+        "Odisha",
+        "Puducherry",
+        "Punjab",
+        "Rajasthan",
+        "Sikkim",
+        "Tamil Nadu",
+        "Telangana",
+        "Tripura",
+        "Uttarakhand",
+        "Uttar Pradesh",
+        "West Bengal"
+      ],
       name: "",
       selected: null,
-      statewises: null
+      statewises: []
     };
   },
   created() {
     axios
       .get(`https://api.covid19india.org/data.json`)
       .then(response => {
-        // JSON responses are automatically parsed.
         // console.log(response.data.statewise[0].active);
-        console.log(response.data);
+        console.log(response);
         this.statewises = response.data.statewise[0];
-        // this.posts = response.data;
       })
       .catch(e => {
-        // this.errors.push(e);
         console.log(e);
       });
   },
   computed: {
     filteredDataArray() {
-      return this.data.filter(option => {
+      return this.stateName.filter(option => {
         return (
           option
             .toString()
@@ -102,4 +150,5 @@ export default {
 .box {
   max-width: 100%;
 }
+
 </style>
